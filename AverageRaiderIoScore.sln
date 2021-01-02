@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AverageRaiderIoScore", "AverageRaiderIoScore\AverageRaiderIoScore.csproj", "{CC071730-E7AB-4632-8101-05219FDFC0EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC071730-E7AB-4632-8101-05219FDFC0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC071730-E7AB-4632-8101-05219FDFC0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC071730-E7AB-4632-8101-05219FDFC0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC071730-E7AB-4632-8101-05219FDFC0EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B257BA8-A2E3-4714-8504-2F9CFEB90BBE}
+	EndGlobalSection
+EndGlobal
