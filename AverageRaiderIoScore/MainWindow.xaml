@@ -6,7 +6,25 @@
         xmlns:local="clr-namespace:AverageRaiderIoScore"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:StringToEnumConverter x:Key="StringToEnumConverter"/>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <ListBox Grid.Row="0" ItemsSource="{Binding Path=Characters}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <ComboBox ItemsSource="{StaticResource ResourceKey=regions}" SelectedItem="{Binding Path=Region, Converter={StaticResource StringToEnumConverter}}"/>
+                        <TextBox Text="{Binding Path=Realm}"/>
+                        <TextBox Text="{Binding Path=Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
