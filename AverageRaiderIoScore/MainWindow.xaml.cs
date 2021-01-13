@@ -9,8 +9,10 @@ namespace AverageRaiderIoScore
     {
         public MainWindow()
         {
-            InitializeComponent();
-            DataContext = new ViewModel();
+            var viewModel = new ViewModel();
+            DataContext = viewModel;
+            this.Resources.Add("regions", viewModel.Regions);
+            InitializeComponent();            
         }
     }
 }

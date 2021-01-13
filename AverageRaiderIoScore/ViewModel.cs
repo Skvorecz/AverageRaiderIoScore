@@ -1,20 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace AverageRaiderIoScore
 {
     class ViewModel
     {
-        List<Character> characters;
+        public string[] Regions { get; } = new string[] { "eu", "us" };
+        public ObservableCollection<Character> Characters { get; }
+
+        public ViewModel()
+        {
+            Characters = new ObservableCollection<Character>() { new Character { Name = "Skvorr", Realm = "Ashenvale", Region = Region.eu },
+                                                                new Character{Name = "Sustamet", Realm = "Gordunni"} };
+        }
 
         private double GetAverageRaiderIoScore()
         {
-            return characters.Select(c => c.RaiderIoScore).Average();
+            return Characters.Select(c => c.RaiderIoScore).Average();
         }
 
         private double GetAverageItemLvl()
         {
-            return characters.Select(c => c.ItemLvl).Average();
+            return Characters.Select(c => c.ItemLvl).Average();
         }
     }
 }
