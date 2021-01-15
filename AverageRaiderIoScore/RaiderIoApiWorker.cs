@@ -25,7 +25,7 @@ namespace AverageRaiderIoScore
             var param = new Dictionary<string, string>() { { "region", region },
                                                             {"realm", realm },
                                                             {"name", name },
-                                                            {"fields", "mythic_plus_scores_by_season:current" } };
+                                                            {"fields", "mythic_plus_scores_by_season:current,gear" } };
 
             var newUrl = new Uri(QueryHelpers.AddQueryString(baseUrl, param));
             return newUrl.AbsoluteUri;

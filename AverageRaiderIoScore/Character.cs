@@ -5,6 +5,7 @@ namespace AverageRaiderIoScore
     class Character : BindableBase
     {
         private double raiderIoScore;
+        private double itemLvl;
 
         public string Name { get; set; }
         public string Realm { get; set; }
@@ -18,6 +19,14 @@ namespace AverageRaiderIoScore
                 RaisePropertyChanged(nameof(RaiderIoScore));
             }
         }
-        public double ItemLvl { get; set; }
+        public double ItemLvl
+        {
+            get => itemLvl;
+            set
+            {
+                itemLvl = value;
+                RaisePropertyChanged(nameof(ItemLvl));
+            }
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace AverageRaiderIoScore
             {
                 var json = JObject.Parse(worker.LoadCharacterJson(character));
                 character.RaiderIoScore = json["mythic_plus_scores_by_season"][0]["scores"]["all"].Value<double>();
+                character.ItemLvl = json["gear"]["item_level_equipped"].Value<double>();
             }
         }
 
