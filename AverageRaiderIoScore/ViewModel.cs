@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.ObjectModel;
+using System.Text;
 using Prism.Commands;
 using Prism.Mvvm;
 using Newtonsoft.Json.Linq;
@@ -9,13 +10,21 @@ namespace AverageRaiderIoScore
 {
     class ViewModel : BindableBase
     {
+        private StringBuilder logTextSb;
+
         public DelegateCommand AddCharacterCommand { get; }
-        public DelegateCommand ExecuteCommand{ get; }
+        public DelegateCommand ExecuteCommand { get; }
+
         public string[] Regions { get; }
         public ObservableCollection<Character> Characters { get; }
 
+        public string LogText => logTextSb.ToString();
+        public double AverageRaiderIoScore => Characters.Select(c => c.RaiderIoScore).Average();
+        public double AverageItemLvl => Characters.Select(c => c.ItemLvl).Average();
+
         public ViewModel()
         {
+            logTextSb = new StringBuilder();
             Regions = Enum.GetNames(typeof(Region));
             Characters = new ObservableCollection<Character>();
             AddCharacter();
@@ -23,9 +32,17 @@ namespace AverageRaiderIoScore
             AddCharacterCommand = new DelegateCommand(() => AddCharacter());
             ExecuteCommand = new DelegateCommand(() =>
             {
-                LoadCharacters();
+                try
+                {
+                    LoadCharacters();
+                }
+                catch (Exception ex)
+                {
+                    LogLine(ex.Message);
+                }
+
                 RaisePropertyChanged(nameof(AverageRaiderIoScore));
-                RaisePropertyChanged(nameof(AverageItemLvl)); 
+                RaisePropertyChanged(nameof(AverageItemLvl));
             });
         }
 
@@ -45,8 +62,11 @@ namespace AverageRaiderIoScore
             }
         }
 
-        public double AverageRaiderIoScore => Characters.Select(c => c.RaiderIoScore).Average();
-
-        public double AverageItemLvl => Characters.Select(c => c.ItemLvl).Average();
+        private void LogLine(string text)
+        {
+            logTextSb.Append(text);
+            logTextSb.AppendLine();
+            RaisePropertyChanged(nameof(LogText));
+        }
     }
 }
