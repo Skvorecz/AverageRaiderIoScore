@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Prism.Commands;
 using Prism.Mvvm;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace AverageRaiderIoScore
 {
@@ -10,11 +11,12 @@ namespace AverageRaiderIoScore
     {
         public DelegateCommand AddCharacterCommand { get; }
         public DelegateCommand ExecuteCommand{ get; }
-        public string[] Regions { get; } = new string[] { "eu", "us" };
+        public string[] Regions { get; }
         public ObservableCollection<Character> Characters { get; }
 
         public ViewModel()
         {
+            Regions = Enum.GetNames(typeof(Region));
             Characters = new ObservableCollection<Character>();
             AddCharacter();
 
