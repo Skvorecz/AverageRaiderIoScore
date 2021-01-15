@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Collections.ObjectModel;
 using Prism.Commands;
-using Newtonsoft.Json.Linq;
 using Prism.Mvvm;
+using Newtonsoft.Json.Linq;
 
 namespace AverageRaiderIoScore
 {
@@ -23,6 +23,7 @@ namespace AverageRaiderIoScore
             {
                 LoadCharacters();
                 RaisePropertyChanged(nameof(AverageRaiderIoScore));
+                RaisePropertyChanged(nameof(AverageItemLvl)); 
             });
         }
 
@@ -43,9 +44,6 @@ namespace AverageRaiderIoScore
 
         public double AverageRaiderIoScore => Characters.Select(c => c.RaiderIoScore).Average();
 
-        private double GetAverageItemLvl()
-        {
-            return Characters.Select(c => c.ItemLvl).Average();
-        }
+        public double AverageItemLvl => Characters.Select(c => c.ItemLvl).Average();
     }
 }
