@@ -13,19 +13,24 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <ListBox Grid.Row="0" ItemsSource="{Binding Path=Characters}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <ComboBox ItemsSource="{StaticResource ResourceKey=regions}" SelectedItem="{Binding Path=Region, Converter={StaticResource StringToEnumConverter}}"/>
-                        <TextBox Text="{Binding Path=Realm}"/>
-                        <TextBox Text="{Binding Path=Name}"/>
+                        <TextBox MinWidth="100" Text="{Binding Path=Realm}"/>
+                        <TextBox MinWidth="100" Text="{Binding Path=Name}"/>
+                        <TextBox MinWidth="50" IsReadOnly="True" Text="{Binding Path=RaiderIoScore, Mode=OneWay}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="1" Command="{Binding Path=AddCharacterCommand}"/>
+        <Button Grid.Row="1" Content="+" Command="{Binding Path=AddCharacterCommand}"/>
+        <Button Grid.Row="2" Content="Load" Command="{Binding Path=ExecuteCommand}"/>
+        <TextBlock Grid.Row="3" Text="{Binding Path=AverageRaiderIoScore}"/>
     </Grid>
 </Window>
