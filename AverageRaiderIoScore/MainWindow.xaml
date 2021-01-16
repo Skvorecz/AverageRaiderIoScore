@@ -13,7 +13,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.7*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -22,7 +23,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Characters}">
+        <ListBox Grid.Row="0" Grid.ColumnSpan="3" ItemsSource="{Binding Path=Characters}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -35,12 +36,13 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
-        <Button Grid.ColumnSpan="2" Grid.Row="1" Content="+" Command="{Binding Path=AddCharacterCommand}"/>
-        <Button Grid.ColumnSpan="2" Grid.Row="2" Content="Load" Command="{Binding Path=ExecuteCommand}"/>
-        
+
+        <Button Grid.ColumnSpan="3" Grid.Row="1" Content="+" Command="{Binding Path=AddCharacterCommand}"/>
+        <Button Grid.ColumnSpan="3" Grid.Row="2" Content="Load" Command="{Binding Path=ExecuteCommand}"/>
+
         <TextBox Grid.Row="3" Grid.Column="0" IsReadOnly="True" Text="{Binding Path=AverageRaiderIoScore, Mode=OneWay}"/>
-        <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=AverageItemLvl, Mode=OneWay}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=AverageKeyLevelDone, Mode=OneWay}"/>
+        <TextBox Grid.Row="3" Grid.Column="2" IsReadOnly="True" Text="{Binding Path=AverageItemLvl, Mode=OneWay}"/>
 
         <TextBlock Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Text="{Binding Path=LogText, Mode=OneWay}" TextWrapping="Wrap"/>
     </Grid>

@@ -10,6 +10,8 @@ namespace AverageRaiderIoScore
 {
     class ViewModel : BindableBase
     {
+        private const int DungeonsCount = 8;
+        private const int BaseRioForDungeon = 10;
         private StringBuilder logTextSb;
 
         public DelegateCommand AddCharacterCommand { get; }
@@ -21,6 +23,7 @@ namespace AverageRaiderIoScore
         public string LogText => logTextSb.ToString();
         public double AverageRaiderIoScore => Characters.Select(c => c.RaiderIoScore).Average();
         public double AverageItemLvl => Characters.Select(c => c.ItemLvl).Average();
+        public double AverageKeyLevelDone => Math.Round(AverageRaiderIoScore / (BaseRioForDungeon * DungeonsCount), 2);
 
         public ViewModel()
         {
@@ -29,7 +32,7 @@ namespace AverageRaiderIoScore
             Characters = new ObservableCollection<Character>();
             AddCharacter();
 
-            AddCharacterCommand = new DelegateCommand(() => AddCharacter());
+            AddCharacterCommand = new DelegateCommand(() => AddCharacter(), () => Characters.Count < 5);
             ExecuteCommand = new DelegateCommand(() =>
             {
                 try
@@ -43,6 +46,7 @@ namespace AverageRaiderIoScore
 
                 RaisePropertyChanged(nameof(AverageRaiderIoScore));
                 RaisePropertyChanged(nameof(AverageItemLvl));
+                RaisePropertyChanged(nameof(AverageKeyLevelDone));
             });
         }
 
