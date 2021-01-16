@@ -20,6 +20,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -39,11 +40,17 @@
 
         <Button Grid.ColumnSpan="3" Grid.Row="1" Content="+" Command="{Binding Path=AddCharacterCommand}"/>
         <Button Grid.ColumnSpan="3" Grid.Row="2" Content="Load" Command="{Binding Path=ExecuteCommand}"/>
+        
+        <Label Grid.Row="3" Grid.Column="0" Content="Average RaiderIO score:"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="Average key level done" />
+        <Label Grid.Row="3" Grid.Column="2" Content="Average item level:" />
 
-        <TextBox Grid.Row="3" Grid.Column="0" IsReadOnly="True" Text="{Binding Path=AverageRaiderIoScore, Mode=OneWay}"/>
-        <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=AverageKeyLevelDone, Mode=OneWay}"/>
-        <TextBox Grid.Row="3" Grid.Column="2" IsReadOnly="True" Text="{Binding Path=AverageItemLvl, Mode=OneWay}"/>
+        <TextBox Grid.Row="4" Grid.Column="0" IsReadOnly="True" Text="{Binding Path=AverageRaiderIoScore, Mode=OneWay}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True" Text="{Binding Path=AverageKeyLevelDone, Mode=OneWay}"/>
+        <TextBox Grid.Row="4" Grid.Column="2" IsReadOnly="True" Text="{Binding Path=AverageItemLvl, Mode=OneWay}"/>
 
-        <TextBlock Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" Text="{Binding Path=LogText, Mode=OneWay}" TextWrapping="Wrap"/>
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="5" Grid.Column="3" VerticalScrollBarVisibility="Auto">
+            <TextBlock Text="{Binding Path=LogText, Mode=OneWay}" TextWrapping="Wrap"/>
+        </ScrollViewer>
     </Grid>
 </Window>
