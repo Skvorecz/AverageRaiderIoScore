@@ -10,7 +10,7 @@ namespace AverageRaiderIoScore
     {
         private const string baseUrl = "https://raider.io/api/v1/characters/profile";
 
-        public string LoadCharacterJson(Character character)
+        public string LoadCharacter(Character character)
         {
             var url = ConstructUrl(character.Region.ToString(), character.Realm, character.Name);
             var request = WebRequest.Create(url);

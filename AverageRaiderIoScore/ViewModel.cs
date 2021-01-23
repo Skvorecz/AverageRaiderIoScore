@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Prism.Commands;
 using Prism.Mvvm;
-using Newtonsoft.Json.Linq;
 using System;
 
 namespace AverageRaiderIoScore
@@ -60,9 +59,9 @@ namespace AverageRaiderIoScore
             var worker = new RaiderIoApiWorker();
             foreach (var character in Characters)
             {
-                var json = JObject.Parse(worker.LoadCharacterJson(character));
-                character.RaiderIoScore = json["mythic_plus_scores_by_season"][0]["scores"]["all"].Value<double>();
-                character.ItemLvl = json["gear"]["item_level_equipped"].Value<double>();
+                var jsonAdapter = new JsonAdapter(worker.LoadCharacter(character));
+                character.RaiderIoScore = jsonAdapter.RaiderIoScore;
+                character.ItemLvl = jsonAdapter.ItemLevel;
             }
         }
 
