@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace AverageRaiderIoScore
 {
-    class RaiderIoApiWorker
+    class RaiderIoApiWorker : IRaiderIoApiWorker
     {
         private const string baseUrl = "https://raider.io/api/v1/characters/profile";
 

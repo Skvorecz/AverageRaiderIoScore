@@ -11,7 +11,9 @@ namespace AverageRaiderIoScore
     {
         private const int DungeonsCount = 8;
         private const int BaseRioForDungeon = 10;
+
         private StringBuilder logTextSb;
+        private IRaiderIoApiWorker RaiderIoApiWorker;
 
         public DelegateCommand AddCharacterCommand { get; }
         public DelegateCommand ExecuteCommand { get; }
@@ -28,6 +30,7 @@ namespace AverageRaiderIoScore
         public ViewModel()
         {
             logTextSb = new StringBuilder();
+            RaiderIoApiWorker = new RaiderIoApiWorker();
             Regions = Enum.GetNames(typeof(Region));
             Characters = new ObservableCollection<Character>();
             AddCharacter();
@@ -59,10 +62,9 @@ namespace AverageRaiderIoScore
 
         private void LoadCharacters()
         {
-            var worker = new RaiderIoApiWorker();
             foreach (var character in Characters)
             {
-                var jsonAdapter = new JsonAdapter(worker.LoadCharacter(character));
+                var jsonAdapter = new JsonAdapter(RaiderIoApiWorker.LoadCharacter(character));
                 character.RaiderIoScore = jsonAdapter.RaiderIoScore;
                 character.ItemLvl = jsonAdapter.ItemLevel;
             }
