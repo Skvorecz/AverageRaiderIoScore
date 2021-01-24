@@ -12,6 +12,7 @@ namespace AverageRaiderIoScore
             var viewModel = new ViewModel();
             DataContext = viewModel;
             this.Resources.Add("regions", viewModel.Regions);
+            this.Resources.Add("deleteCommand", viewModel.DeleteCommand);
             InitializeComponent();            
         }
     }

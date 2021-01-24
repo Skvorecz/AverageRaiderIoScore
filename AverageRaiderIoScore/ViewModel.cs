@@ -15,6 +15,7 @@ namespace AverageRaiderIoScore
 
         public DelegateCommand AddCharacterCommand { get; }
         public DelegateCommand ExecuteCommand { get; }
+        public DelegateCommand<Character> DeleteCommand { get; }
 
         public string[] Regions { get; }
         public ObservableCollection<Character> Characters { get; }
@@ -31,7 +32,8 @@ namespace AverageRaiderIoScore
             Characters = new ObservableCollection<Character>();
             AddCharacter();
 
-            AddCharacterCommand = new DelegateCommand(() => AddCharacter(), () => Characters.Count < 5);
+            AddCharacterCommand = new DelegateCommand(() => AddCharacter(),
+                                                            () => Characters.Count < 5);
             ExecuteCommand = new DelegateCommand(() =>
             {
                 try
@@ -47,6 +49,7 @@ namespace AverageRaiderIoScore
                 RaisePropertyChanged(nameof(AverageItemLvl));
                 RaisePropertyChanged(nameof(AverageKeyLevelDone));
             });
+            DeleteCommand = new DelegateCommand<Character>((c) => Characters.Remove(c));
         }
 
         private void AddCharacter()

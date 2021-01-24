@@ -33,6 +33,7 @@
                         <TextBox MinWidth="100" Text="{Binding Path=Name}"/>
                         <TextBox MinWidth="50" IsReadOnly="True" Text="{Binding Path=RaiderIoScore, Mode=OneWay}"/>
                         <TextBox MinWidth="50" IsReadOnly="True" Text="{Binding Path=ItemLvl, Mode=OneWay}"/>
+                        <Button MinWidth="20" Content="-"  Command="{StaticResource ResourceKey=deleteCommand}" CommandParameter="{Binding Path=.}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
