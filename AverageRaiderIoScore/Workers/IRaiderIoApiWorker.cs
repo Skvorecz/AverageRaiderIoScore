@@ -1,4 +1,4 @@
-﻿namespace AverageRaiderIoScore
+﻿namespace AverageRaiderIoScore.Workers
 {
     interface IRaiderIoApiWorker
     {

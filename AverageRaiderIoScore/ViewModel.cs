@@ -4,6 +4,7 @@ using System.Text;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using AverageRaiderIoScore.Workers;
 
 namespace AverageRaiderIoScore
 {
@@ -61,14 +62,14 @@ namespace AverageRaiderIoScore
         }
 
         private void LoadCharacters()
-        {
+        {            
             foreach (var character in Characters)
             {
-                var jsonAdapter = new JsonAdapter(RaiderIoApiWorker.LoadCharacter(character));
+                var jsonAdapter = new JsonWorker(RaiderIoApiWorker.LoadCharacter(character));
                 character.RaiderIoScore = jsonAdapter.RaiderIoScore;
                 character.ItemLvl = jsonAdapter.ItemLevel;
             }
-        }
+        }        
 
         private void LogLine(string text)
         {

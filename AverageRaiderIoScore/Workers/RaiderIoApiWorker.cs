@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace AverageRaiderIoScore
+namespace AverageRaiderIoScore.Workers
 {
     class RaiderIoApiWorker : IRaiderIoApiWorker
     {
