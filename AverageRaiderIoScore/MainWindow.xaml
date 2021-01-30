@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AverageRaiderIoScore"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Average RaiderIO score" Height="450" Width="800">
     <Window.Resources>
         <local:StringToRegionConverter x:Key="StringToEnumConverter"/>
     </Window.Resources>

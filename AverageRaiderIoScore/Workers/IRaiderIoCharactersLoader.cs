@@ -1,5 +1,4 @@
 ﻿using AverageRaiderIoScore.Domain;
-using System.Collections.Generic;
 
 namespace AverageRaiderIoScore.Workers
 {
