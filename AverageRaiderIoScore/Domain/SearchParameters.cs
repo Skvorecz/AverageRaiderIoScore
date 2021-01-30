@@ -4,9 +4,9 @@ namespace AverageRaiderIoScore.Domain
 {
     class SearchParameters
     {
-        public List<Character> Characters { get; }
+        public IList<Character> Characters { get; }
 
-        public SearchParameters(List<Character> characters)
+        public SearchParameters(IList<Character> characters)
         {
             Characters = characters;
         }

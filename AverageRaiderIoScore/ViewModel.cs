@@ -15,7 +15,7 @@ namespace AverageRaiderIoScore
         private const int BaseRioForDungeon = 10;
 
         private StringBuilder logTextSb;
-        private IRaiderIoApiWorker RaiderIoApiWorker;
+        private IRaiderIoCharactersLoader raiderIoCharactersLoader;
 
         public DelegateCommand AddCharacterCommand { get; }
         public DelegateCommand ExecuteCommand { get; }
@@ -32,45 +32,41 @@ namespace AverageRaiderIoScore
         public ViewModel()
         {
             logTextSb = new StringBuilder();
-            RaiderIoApiWorker = new RaiderIoApiWorker();
+            raiderIoCharactersLoader = new RaiderIoCharactersLoader();
             Regions = Enum.GetNames(typeof(Region));
             Characters = new ObservableCollection<Character>();
             AddCharacter();
 
             AddCharacterCommand = new DelegateCommand(() => AddCharacter(),
                                                             () => Characters.Count < 5);
-            ExecuteCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    LoadCharacters();
-                }
-                catch (Exception ex)
-                {
-                    LogLine(ex.Message);
-                }
-
-                RaisePropertyChanged(nameof(AverageRaiderIoScore));
-                RaisePropertyChanged(nameof(AverageItemLvl));
-                RaisePropertyChanged(nameof(AverageKeyLevelDone));
-            });
+            ExecuteCommand = new DelegateCommand(() => Execute());
             DeleteCommand = new DelegateCommand<Character>((c) => Characters.Remove(c));
+        }
+
+        private void Execute()
+        {
+            try
+            {
+                LoadCharacters();
+            }
+            catch (Exception ex)
+            {
+                LogLine(ex.Message);
+            }
+
+            RaisePropertyChanged(nameof(AverageRaiderIoScore));
+            RaisePropertyChanged(nameof(AverageItemLvl));
+            RaisePropertyChanged(nameof(AverageKeyLevelDone));
+        }
+        private void LoadCharacters()
+        {
+            raiderIoCharactersLoader.LoadCharacters(new SearchParameters(Characters));
         }
 
         private void AddCharacter()
         {
             Characters.Add(new Character());
         }
-
-        private void LoadCharacters()
-        {            
-            foreach (var character in Characters)
-            {
-                var jsonAdapter = new JsonWorker(RaiderIoApiWorker.LoadCharacter(character));
-                character.RaiderIoScore = jsonAdapter.RaiderIoScore;
-                character.ItemLvl = jsonAdapter.ItemLevel;
-            }
-        }        
 
         private void LogLine(string text)
         {
