@@ -1,4 +1,4 @@
-﻿namespace AverageRaiderIoScore
+﻿namespace AverageRaiderIoScore.Domain
 {
     enum Region
     {

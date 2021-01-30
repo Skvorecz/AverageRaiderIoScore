@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using AverageRaiderIoScore.Workers;
+using AverageRaiderIoScore.Domain;
 
 namespace AverageRaiderIoScore
 {

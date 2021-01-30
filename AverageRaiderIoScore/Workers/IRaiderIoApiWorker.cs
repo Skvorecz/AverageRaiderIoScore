@@ -1,4 +1,6 @@
-﻿namespace AverageRaiderIoScore.Workers
+﻿using AverageRaiderIoScore.Domain;
+
+namespace AverageRaiderIoScore.Workers
 {
     interface IRaiderIoApiWorker
     {

@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace AverageRaiderIoScore
+namespace AverageRaiderIoScore.Domain
 {
     class Character : BindableBase
     {

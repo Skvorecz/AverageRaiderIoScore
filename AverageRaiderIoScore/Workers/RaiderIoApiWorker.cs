@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Microsoft.AspNetCore.WebUtilities;
+using AverageRaiderIoScore.Domain;
 
 namespace AverageRaiderIoScore.Workers
 {
