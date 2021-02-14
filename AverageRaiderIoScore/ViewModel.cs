@@ -11,12 +11,16 @@ namespace AverageRaiderIoScore
 {
     class ViewModel : BindableBase
     {
+        #region Fields
         private const int DungeonsCount = 8;
         private const int BaseRioForDungeon = 10;
 
         private StringBuilder logTextSb;
         private IRaiderIoCharactersLoader raiderIoCharactersLoader;
+        private SerializationWorker serializationWorker;
+        #endregion
 
+        #region Properties
         public DelegateCommand AddCharacterCommand { get; }
         public DelegateCommand ExecuteCommand { get; }
         public DelegateCommand<Character> DeleteCommand { get; }
@@ -28,11 +32,13 @@ namespace AverageRaiderIoScore
         public double AverageRaiderIoScore => Characters.Select(c => c.RaiderIoScore).Average();
         public double AverageItemLvl => Characters.Select(c => c.ItemLvl).Average();
         public double AverageKeyLevelDone => Math.Round(AverageRaiderIoScore / (BaseRioForDungeon * DungeonsCount), 2);
+        #endregion
 
         public ViewModel()
         {
             logTextSb = new StringBuilder();
             raiderIoCharactersLoader = new RaiderIoCharactersLoader();
+            serializationWorker = new SerializationWorker();
             Regions = Enum.GetNames(typeof(Region));
             Characters = new ObservableCollection<Character>();
             AddCharacter();
@@ -47,7 +53,9 @@ namespace AverageRaiderIoScore
         {
             try
             {
-                LoadCharacters();
+                var parameters = new SearchParameters(Characters);
+                LoadCharacters(parameters);
+                serializationWorker.SerializeAppSnapshot(new AppSnapshot(parameters), "snapshot.json");
             }
             catch (Exception ex)
             {
@@ -58,9 +66,9 @@ namespace AverageRaiderIoScore
             RaisePropertyChanged(nameof(AverageItemLvl));
             RaisePropertyChanged(nameof(AverageKeyLevelDone));
         }
-        private void LoadCharacters()
+        private void LoadCharacters(SearchParameters searchParameters)
         {
-            raiderIoCharactersLoader.LoadCharacters(new SearchParameters(Characters));
+            raiderIoCharactersLoader.LoadCharacters(searchParameters);
         }
 
         private void AddCharacter()

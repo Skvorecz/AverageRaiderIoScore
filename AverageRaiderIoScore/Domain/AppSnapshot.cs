@@ -1,5 +1,8 @@
-﻿namespace AverageRaiderIoScore.Domain
-{    
+﻿using System;
+
+namespace AverageRaiderIoScore.Domain
+{
+    [Serializable]
     class AppSnapshot
     {
         public SearchParameters SearchParameters { get; }
