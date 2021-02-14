@@ -48,6 +48,8 @@ namespace AverageRaiderIoScore
                                                             () => Characters.Count < 5);
             ExecuteCommand = new DelegateCommand(() => Execute());
             DeleteCommand = new DelegateCommand<Character>((c) => Characters.Remove(c));
+
+            DeserializeCharacters();
         }
 
         private void Execute()
@@ -75,6 +77,19 @@ namespace AverageRaiderIoScore
         private void AddCharacter()
         {
             Characters.Add(new Character());
+        }
+
+        private void DeserializeCharacters()
+        {
+            var snapshot = serializationWorker.DeserializeAppSnapshot(Resources.AppSnapshotFilePath);
+            var deserializedCharacters = snapshot.SearchParameters.Characters;
+            Characters.Clear();
+            Characters.AddRange(deserializedCharacters.Select(c => new Character() 
+            {
+                Region = c.Region,
+                Realm = c.Realm,
+                Name = c.Name
+            }));
         }
 
         private void LogLine(string text)

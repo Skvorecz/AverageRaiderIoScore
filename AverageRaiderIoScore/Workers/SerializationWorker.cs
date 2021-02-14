@@ -14,5 +14,15 @@ namespace AverageRaiderIoScore.Workers
                 serializer.Serialize(file, appSnapshot);
             }
         }
+
+        public AppSnapshot DeserializeAppSnapshot(string filePath)
+        {
+            using (StreamReader file = File.OpenText(filePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                AppSnapshot snapshot = (AppSnapshot)serializer.Deserialize(file, typeof(AppSnapshot));
+                return snapshot;
+            }
+        }
     }
 }
