@@ -41,15 +41,22 @@ namespace AverageRaiderIoScore
             raiderIoCharactersLoader = new RaiderIoCharactersLoader();
             serializationWorker = new SerializationWorker();
             Regions = Enum.GetNames(typeof(Region));
-            Characters = new ObservableCollection<Character>();
-            AddCharacter();
 
             AddCharacterCommand = new DelegateCommand(() => AddCharacter(),
                                                             () => Characters.Count < 5);
             ExecuteCommand = new DelegateCommand(() => Execute());
             DeleteCommand = new DelegateCommand<Character>((c) => Characters.Remove(c));
 
-            DeserializeCharacters();
+            Characters = new ObservableCollection<Character>();
+            try
+            {
+                DeserializeCharacters();
+            }
+            catch
+            {
+                Characters.Clear();
+                AddCharacter();
+            }
         }
 
         private void Execute()
@@ -58,7 +65,7 @@ namespace AverageRaiderIoScore
             {
                 var parameters = new SearchParameters(Characters);
                 LoadCharacters(parameters);
-                serializationWorker.SerializeAppSnapshot(new AppSnapshot(parameters), Resources.AppSnapshotFilePath);
+                serializationWorker.SerializeAppSnapshotAsync(new AppSnapshot(parameters), Resources.AppSnapshotFilePath);
             }
             catch (Exception ex)
             {
@@ -83,7 +90,6 @@ namespace AverageRaiderIoScore
         {
             var snapshot = serializationWorker.DeserializeAppSnapshot(Resources.AppSnapshotFilePath);
             var deserializedCharacters = snapshot.SearchParameters.Characters;
-            Characters.Clear();
             Characters.AddRange(deserializedCharacters.Select(c => new Character() 
             {
                 Region = c.Region,

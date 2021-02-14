@@ -1,17 +1,18 @@
 ﻿using AverageRaiderIoScore.Domain;
 using Newtonsoft.Json;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AverageRaiderIoScore.Workers
 {
     class SerializationWorker
     {
-        public void SerializeAppSnapshot(AppSnapshot appSnapshot, string filePath)
+        public async void SerializeAppSnapshotAsync(AppSnapshot appSnapshot, string filePath)
         {
             using (StreamWriter file = File.CreateText(filePath))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, appSnapshot);
+                await Task.Run(() => serializer.Serialize(file, appSnapshot));
             }
         }
 
