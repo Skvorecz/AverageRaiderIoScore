@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using System;
 using AverageRaiderIoScore.Workers;
 using AverageRaiderIoScore.Domain;
+using AverageRaiderIoScore.Properties;
 
 namespace AverageRaiderIoScore
 {
@@ -55,7 +56,7 @@ namespace AverageRaiderIoScore
             {
                 var parameters = new SearchParameters(Characters);
                 LoadCharacters(parameters);
-                serializationWorker.SerializeAppSnapshot(new AppSnapshot(parameters), "snapshot.json");
+                serializationWorker.SerializeAppSnapshot(new AppSnapshot(parameters), Resources.AppSnapshotFilePath);
             }
             catch (Exception ex)
             {
